@@ -41,15 +41,11 @@ Performing the simulations at a range of angles of attack allows the exploration
 
 ### Mesh Description
 
-The computational domain contains the wing half-span mounted on one boundary in the x-z plane. The mesh consists of 43,008 hexahedral elements and 46,417 nodes. Again, we note that this is a very coarse mesh, and should one wish to obtain more accurate solutions for comparison with results in the literature, finer grids should be used. 
+The mesh used is a structured C-grid. The farfield boundary extends 500c away from the airfoil surface. The airfoil surface is treated as a Navier-Stokes wall (non-slip). This can be seen in Figure (1).
 
-Three boundary conditions are employed: the Navier-Stokes adiabatic wall condition on the wing surface, the far-field characteristic-based condition on the far-field markers, and a symmetry boundary condition for the marker where the wing half-span is attached. The symmetry condition acts to mirror the flow about the x-z plane, reducing the size of the mesh and the computational cost. Images of the entire domain and the quadrilateral elements on the wing surface are shown below.
+![NACA0012 mesh](../../UQ_NACA0012/images/n0012_225-65_mesh.png)
+Figure (1): Zoomed in view of mesh near airfoil.
 
-![Turb ONERA Mesh](../../Turbulent_ONERAM6/images/turb_onera_mesh_bcs.png)
-Figure (1): Far-field view of the computational mesh.
-
-![Turb ONERA Surface Mesh](../../Turbulent_ONERAM6/images/turb_onera_surface_mesh.png)
-Figure (2): Close-up view of the structured surface mesh on the upper wing surface.
 
 ### Configuration File Options
 
