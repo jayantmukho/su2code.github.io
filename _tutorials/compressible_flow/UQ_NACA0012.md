@@ -3,7 +3,7 @@ title: Epistemic Uncertainty Quantification of RANS predictions of NACA 0012 air
 permalink: /tutorials/UQ_NACA0012/
 ---
 
-![C_L Distribution](../../UQ_NACA0012/images/225-65_liftCurve.png)
+![C_L Distribution](../../UQ_NACA0012/images/225-65_liftCurve_bigger.png)
 
 ## Goals
 
