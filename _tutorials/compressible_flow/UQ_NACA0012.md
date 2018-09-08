@@ -88,7 +88,8 @@ by convergence.
 
 Specific combinations of COMPONENTALITY and PERMUTE are required to perform the 5 perturbed simulations needed to characterize the interval estimates on the QOIs. The combinations are highlighted in Table (1)
 
-|Perturbation | COMPONENTALITY | PERMUTE |
+| Perturbation | COMPONENTALITY | PERMUTE |
+|--------------|----------------|---------|
 |1c | 1 | NO |
 |2c | 2 | NO |
 |3c | 3 | NO |
