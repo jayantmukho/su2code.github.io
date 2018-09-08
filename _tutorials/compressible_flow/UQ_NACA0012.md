@@ -95,6 +95,7 @@ Specific combinations of COMPONENTALITY and PERMUTE are required to perform the 
 |3c | 3 | NO |
 |p1c1 | 1 | YES |
 |p1c2 | 2 | YES |
+
 Table (1): Combination of options required to perform each perturbation
 
 For the sake of uniformity and clarity, it is suggested to perform perturbed simulations in subdirectories named according to the naming convention mentioned in the table. For example, the configuration options listed above would perform the 1c perturbation. This configuration file and the corresponding mesh file should be stored in a sub-directory 1c/. 
