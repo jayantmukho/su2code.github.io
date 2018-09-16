@@ -29,7 +29,7 @@ The following tutorial will walk you through the steps required when using the E
 
 This test case is for the NACA 0012 airfoil in viscous flow. This is a simple 2D geometry that stalls, and exhibits seperated flow, at high angles of attack. It is a ubiquitous geometry that has significant amounts of experimental data available that allows for the comparison of lower fidelity RANS CFD simulations, to the higher fidelity wind tunnel tests that have been conducted. 
 
-The EQUiPS module uses the Eigenspace Perturbation methodology to estimate the uncertainties arising from RANS turbulence closures. This involves perturbing the eigenvalues and eigenvectors of the Reynolds stress tensor to explore the extremal states of componentality, and turbulence production of the flow. Utilizing 5 differently perturbed flow simulations, in addition to a baseline unperturbed flow simulation, the module provides interval estimates on the quantities of interest. 
+The EQUiPS module uses the Eigenspace Perturbation methodology to estimate the uncertainties arising from RANS turbulence closures. This involves perturbing the eigenvalues and eigenvectors of the Reynolds stress tensor to explore the extremal states of componentality, and turbulence production of the flow. Utilizing 5 differently perturbed flow simulations, in addition to a baseline unperturbed flow simulation, the module provides interval estimates on the quantities of interest. Each perturbed simulation results in a different realization of the flow field, and by extension, a different realization of the QoIs. The interval bounds are formed by the maximum and minimum values the QoIs resulting from these 6 simulations.
 
 
 ### Problem Setup
@@ -41,7 +41,7 @@ This problem will solve the flow past the airfoil with these conditions:
 - Reynolds number = 6.02E6
 - Reynolds length = 1.0 m
 
-Performing the simulations at a range of angles of attack allows the exploration of the various flow regimes that occur. At low angles of attack, the flow stays attached and the 
+Although this particular case simulates flow at 15deg, the same simulation can be run at varying angles of attack. The results section shows results from performing the simulations at a range of angles of attack which allows the exploration of the various flow regimes that occur. At low angles of attack, the flow stays attached and RANS simualtions are quite accurate in predicting the flow. At higher angles of attack, the onset of stall causes flow seperation which leads to inaccuracies in flow predictions. The performance of this module in these varying conditions is showcased. 
 
 ### Mesh Description
 
@@ -118,29 +118,34 @@ To run this test case, follow these steps at a terminal command line:
     ```
     $ compute_uncertainty.py -f turb_NACA0012_uq.cfg -n NP
     ```
- 4. SU2 will create a sub-directory for each simulation and run the simulations sequentially. It will also print residual updates with each iteration of the flow solver. Each p     rturbed simulation will terminate after reaching the specified convergence criteria. As soon as one simulation is completed, the next one will begin in a new sub-directory. 
- 5. Files containing the results will be written at the end of each simulation. The flow solutions can be visualized in ParaView (.vtk) or Tecplot (.dat for ASCII).
+ 4. The python script will create a sub-directory for each simulation and run the simulations sequentially. It will also print residual updates with each iteration of the flow solver. Each perturbed simulation will terminate after reaching the specified convergence criteria. As soon as one simulation is completed, the next one will begin in a new sub-directory. 
+ 5. Files containing the results will be written at the end of each perturbed simulation in the respective subdirectory. The flow solutions can be visualized in ParaView (.vtk) or Tecplot (.dat for ASCII).
 
 #### Individual Perturbed Simulations
 
 To run each individual perturbed simulation seperately, configuration options for each simulation need to be defined. Follow these steps in the command line. 
  1. Move to the directory containing the config file ([turb_NACA0012_uq.cfg](../../UQ_NACA0012/turb_NACA0012_uq.cfg)) and the mesh file ([mesh_n0012_225-65.su2](../../UQ_NACA0012/mesh_n0012_225-65.su2)). 
- 2. Create a sub-directory named `1c` and copy the configuration file and mesh file within this directory.
- 3. In the configuration file, copy the set of options mentioned above into the configuration file. 
+ 2. Create a sub-directory named `1c` (named after the 1st perturbation) and copy the configuration file and mesh file within this directory.
+ 3. Move to this subdirectory and in the configuration file, copy the set of options mentioned above.
  4. If running in series, make sure that the SU2 tools were compiled, installed, and that their install location was added to your path. Enter the following in the command line: 
+
  	```
-    $ SU2 turb_NACA0012_uq.cfg
+    $ SU2_CFD turb_NACA0012_uq.cfg
     ```
- 5. Run the python script which will automatically call SU2_CFD and will perform the simulation using `NP` number of processors by entering in the command line:
+
+ 5. If running in parallel, make sure that the SU2 tools were compiled with parallel support, installed, and that their install location was added to your path. Run the python script which will automatically call SU2_CFD and will perform the simulation using `NP` number of processors by entering in the command line:
 
     ```
     $ parallel_computation.py -n NP -f turb_ONERAM6.cfg
     ```
 
- 3. SU2 will print residual updates with each iteration of the flow solver, and the simulation will terminate after reaching the specified convergence criteria.
- 4. The python script will automatically call the `SU2_SOL` executable for generating visualization files from the native restart file written during runtime. The flow solution can then be visualized in ParaView (.vtk) or Tecplot (.dat for ASCII).
+ 6. SU2 will print residual updates with each iteration of the flow solver, and this first perturbed simulation will terminate after reaching the specified convergence criteria. The solution files 
+ 7. Files containing the results will be written upon exiting SU2. 
+ 8. Steps 2 onwards will have to be repeated for each of the 4 remaining perturbed simulations. In each case, the sub-directory should be named, and the configuration options changed (COMPONENTALITY and PERMUTE), according to convention illustrated in Table (1). 
 
 ### Results
+
+In order to obtain the interval bounds of the 
 
 Results for the turbulent flow over the ONERA M6 wing are shown below. As part of this tutorial a coarse mesh has been provided, but for comparison the results obtained by using a refined mesh (9,252,922 nodes) as well as experimental results are shown.
 
