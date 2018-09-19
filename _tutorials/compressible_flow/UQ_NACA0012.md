@@ -147,11 +147,13 @@ To run each individual perturbed simulation seperately, configuration options fo
 
 ### Results
 
-In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. In Figure(3), only the individual perturbation data is hidden. 
+In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2a) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. In Figure(2b), only the individual perturbation data is hidden. 
 
-![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
+![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png =200x)
 
 ![C_P Distribution_15](../../UQ_NACA0012/images/aoa15_cp_upper.png)
+
+Figure (2): Cp distribution along upper surface for the NACA0012 airfoil at 15deg AOA. 
 
 The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
 
