@@ -16,7 +16,7 @@ This tutorial covers the EQUiPS (Enabling Quantification of Uncertainty in Physi
 
 ## Resources
 
-The resources for this tutorial can be found in the [UQ_NACA0012](https://github.com/su2code/su2code.github.io/tree/master/UQ_NACA0012) directory in the [project website repository](https://github.com/su2code/su2code.github.io). You will need the configuration file ([turb_NACA0012_uq.cfg](../../UQ_NACA0012/turb_NACA0012_uq.cfg)) and the mesh file ([mesh_n0012_225-65.su2](../../UQ_NACA0012/mesh_n0012_225-65.su2)). 
+The resources for this tutorial can be found in the [UQ_NACA0012](https://github.com/su2code/su2code.github.io/tree/master/UQ_NACA0012) directory in the [project website repository](https://github.com/su2code/su2code.github.io). You will need the configuration file ([turb_NACA0012_uq.cfg](../../UQ_NACA0012/turb_NACA0012_uq.cfg)) and the mesh file ([mesh_n0012_225-65.su2](../../UQ_NACA0012/mesh_n0012_225-65.su2)). Note that this tutorial directory contains 5 other configuration files as well. These are for running the perturbations manually and details for that will be covered in the Running Individual Perturbations section.
 
 Details about the methodology and implementation in SU2 is available as a [pre-print](https://arxiv.org/pdf/1803.00725.pdf)
 
@@ -41,7 +41,7 @@ This problem will solve the flow past the airfoil with these conditions:
 - Reynolds number = 6.02E6
 - Reynolds length = 1.0 m
 
-Although this particular case simulates flow at 15deg, the same simulation can be run at varying angles of attack. The results section shows results from performing the simulations at a range of angles of attack which allows the exploration of the various flow regimes that occur. At low angles of attack, the flow stays attached and RANS simualtions are quite accurate in predicting the flow. At higher angles of attack, the onset of stall causes flow seperation which leads to inaccuracies in flow predictions. The performance of this module in these varying conditions is showcased. 
+Although this particular case simulates flow at 15deg, the same simulation can be run at varying angles of attack. The results section presents analyses from performing the simulations at a range of angles of attack which allows the exploration of the various flow regimes that occur. At low angles of attack, the flow stays attached and RANS simualtions are quite accurate in predicting the flow. At higher angles of attack, the onset of stall causes flow seperation which leads to inaccuracies in flow predictions.
 
 ### Mesh Description
 
@@ -98,11 +98,14 @@ Specific combinations of COMPONENTALITY and PERMUTE are required to perform the 
 
 Table (1): Combination of options required to perform each perturbation
 
-For the sake of uniformity and clarity, it is suggested to perform perturbed simulations in subdirectories named according to the naming convention mentioned in the table. For example, the configuration options listed above would perform the 1c perturbation. This configuration file and the corresponding mesh file should be stored in a sub-directory 1c/. 
+The correct combinations of these options are also included in the additional configuration files included in this tutorials directory: [UQ_NACA0012](https://github.com/su2code/su2code.github.io/tree/master/UQ_NACA0012). These files are named turb_NACA0012_uq_PERTURBATION.cfg, where the keyword PERTURBATION is replaced with the names included in Table (1).
+
+For the sake of uniformity and clarity, it is suggested to perform perturbed simulations in subdirectories named according to the naming convention mentioned in the table. For example, the configurtaion file [turb_NACA0012_uq_1c.cfg](../../UQ_NACA0012/turb_NACA0012_uq.cfg) (which performs the 1c perturbation), and the mesh file should be moved to a sub-directory 1c/. The CFD simulation should be performed within this directory. This keeps with the convention used by the python script. 
+
 
 ### Running SU2
 
-Instructions for running this test case are given here for both cases, where you would like to use the Python script, and if you would like to perform the simulations individually. 
+For this test case, the baseline flow solution and restart files are provided. For any other case, it is imperative that before running the perturbed simulations, the baseline unperturbed simulation is run and the solution is well converged. This ensures that the configuration file and the mesh are well posed and will result in converged perturbed simulations as well. Instructions for running the perturbed simulations for this test case are given here for both cases, if you would like to use the Python script, or if you would like to perform the simulations individually. 
 
 #### Python Script
 
@@ -123,10 +126,9 @@ To run this test case, follow these steps at a terminal command line:
 
 #### Individual Perturbed Simulations
 
-To run each individual perturbed simulation seperately, configuration options for each simulation need to be defined. Follow these steps in the command line. 
- 1. Move to the directory containing the config file ([turb_NACA0012_uq.cfg](../../UQ_NACA0012/turb_NACA0012_uq.cfg)) and the mesh file ([mesh_n0012_225-65.su2](../../UQ_NACA0012/mesh_n0012_225-65.su2)). 
- 2. Create a sub-directory named `1c` (named after the 1st perturbation) and copy the configuration file and mesh file within this directory.
- 3. Move to this subdirectory and in the configuration file, copy the set of options mentioned above.
+To run each individual perturbed simulation seperately, configuration options for each simulation need to be defined. For the purposes of this tutorial, the configuration files for each of the perturbed simulations is provided in the [UQ_NACA0012](https://github.com/su2code/su2code.github.io/tree/master/UQ_NACA0012) directory in the [project website repository](https://github.com/su2code/su2code.github.io). The following steps walk through the process of running one of these perturbations (1c). These steps need to be repeated for each of the perturbations to fully define the interval bounds predicted by the methodology. Follow these steps in the command line. 
+ 1. Move to the directory containing the config file ([turb_NACA0012_uq_1c.cfg](../../UQ_NACA0012/turb_NACA0012_uq_1c.cfg)) and the mesh file ([mesh_n0012_225-65.su2](../../UQ_NACA0012/mesh_n0012_225-65.su2)). 
+ 2. Create a sub-directory named `1c` (named after the 1st perturbation) and copy the configuration file and mesh file within this directory, and move to this sub-directory.
  4. If running in series, make sure that the SU2 tools were compiled, installed, and that their install location was added to your path. Enter the following in the command line: 
 
  	```
@@ -139,13 +141,16 @@ To run each individual perturbed simulation seperately, configuration options fo
     $ parallel_computation.py -n NP -f turb_ONERAM6.cfg
     ```
 
- 6. SU2 will print residual updates with each iteration of the flow solver, and this first perturbed simulation will terminate after reaching the specified convergence criteria. The solution files 
+ 6. SU2 will print residual updates with each iteration of the flow solver, and this first perturbed simulation will terminate after reaching the specified convergence criteria. 
  7. Files containing the results will be written upon exiting SU2. 
- 8. Steps 2 onwards will have to be repeated for each of the 4 remaining perturbed simulations. In each case, the sub-directory should be named, and the configuration options changed (COMPONENTALITY and PERMUTE), according to convention illustrated in Table (1). 
+ 8. Repeat the steps for each of the perturbations, creating appropriately named sub-directories.  
 
 ### Results
 
-In order to obtain the interval bounds of the 
+In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
+
+![C_P Distribution](../../UQ_NACA0012/images/225-65_liftCurve_bigger.png)
+
 
 Results for the turbulent flow over the ONERA M6 wing are shown below. As part of this tutorial a coarse mesh has been provided, but for comparison the results obtained by using a refined mesh (9,252,922 nodes) as well as experimental results are shown.
 
