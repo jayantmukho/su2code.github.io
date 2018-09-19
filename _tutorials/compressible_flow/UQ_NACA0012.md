@@ -147,14 +147,19 @@ To run each individual perturbed simulation seperately, configuration options fo
 
 ### Results
 
-In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
+In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. In Figure(3), only the individual perturbation data is hidden. 
 
-![C_P Distribution](../../UQ_NACA0012/images/225-65_liftCurve_bigger.png)
+![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
+
+![C_P Distribution_15](../../UQ_NACA0012/images/aoa15_cp_upper2.png)
+
+The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
+
 
 
 Results for the turbulent flow over the ONERA M6 wing are shown below. As part of this tutorial a coarse mesh has been provided, but for comparison the results obtained by using a refined mesh (9,252,922 nodes) as well as experimental results are shown.
 
-![Turb ONERA Cp A](../../Turbulent_ONERAM6/images/turb_onera_cp_a.png)
+![Turb ONERA Cp A](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
 ![Turb ONERA Cp B](../../Turbulent_ONERAM6/images/turb_onera_cp_b.png)
 ![Turb ONERA Cp C](../../Turbulent_ONERAM6/images/turb_onera_cp_c.png)
 ![Turb ONERA Cp D](../../Turbulent_ONERAM6/images/turb_onera_cp_d.png)
