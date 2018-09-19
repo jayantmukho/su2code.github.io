@@ -31,6 +31,8 @@ This test case is for the NACA 0012 airfoil in viscous flow. This is a simple 2D
 
 The EQUiPS module uses the Eigenspace Perturbation methodology to estimate the uncertainties arising from RANS turbulence closures. This involves perturbing the eigenvalues and eigenvectors of the Reynolds stress tensor to explore the extremal states of componentality, and turbulence production of the flow. Utilizing 5 differently perturbed flow simulations, in addition to a baseline unperturbed flow simulation, the module provides interval estimates on the quantities of interest. Each perturbed simulation results in a different realization of the flow field, and by extension, a different realization of the QoIs. The interval bounds are formed by the maximum and minimum values the QoIs resulting from these 6 simulations.
 
+It is important to note here that these bounds are not informed by the use of any high fidelity data. These are purely range of possible values for the QOIs. They do not assume any probability distribution within them.
+
 
 ### Problem Setup
 
@@ -149,21 +151,23 @@ To run each individual perturbed simulation seperately, configuration options fo
 
 In order to obtain the interval bounds of a QOI, all 6 instantiations of the flow solution (1 baseline and 5 perturbed) must be analyzed. To illustrate how the bounds are formed, we use the example of the Cp distribution along the upper surface of the airfoil. In Figure (2a) the Cp distributions of each perturbed simulation is plotted along with the baseline simulation, experimental data, and the uncertainty bounds. In Figure(2b), only the individual perturbation data is hidden. 
 
-![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png =200x)
+![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
 
 ![C_P Distribution_15](../../UQ_NACA0012/images/aoa15_cp_upper.png)
 
-Figure (2): Cp distribution along upper surface for the NACA0012 airfoil at 15deg AOA. 
+Figure (2): Cp distribution along upper surface for the NACA0012 airfoil at 15deg AOA (a) with individual perturbations included, (b) with only the resulting interval bounds. 
 
-The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
+The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. It is interesting to see the bounds are larger in areas with correspondingly large discrepancy between the baseline simulation, and the experimental data. 
+
+At an angle of attack of 10deg, the baseline RANS model is able to accurately predict the Cp distribution. If the UQ module is run at this angle, it is seen that the uncertainty bounds are much smaller. This case can be run simply using the steps as above, only changing the AOA option for the files. This is illustrated in Figure(3)
+
+![C_P Distribution_10](../../UQ_NACA0012/images/aoa10_cp_upper.png)
+
+Figure (3): Cp distribution along upper surface for the NACA0012 airfoil at 10deg AOA with predicted interval bounds
+
+Similarly, if the module is run for a number of angles of attack, the predicted lift curve can be plotted. This showcases the robustness of the model in different flow situations. Figure(4) illustrates the results from a angle of attack sweep from 0 to 20 degrees. 
+
+![C_P Distribution_10](../../UQ_NACA0012/images/225-65_liftCurve.png)
 
 
-
-Results for the turbulent flow over the ONERA M6 wing are shown below. As part of this tutorial a coarse mesh has been provided, but for comparison the results obtained by using a refined mesh (9,252,922 nodes) as well as experimental results are shown.
-
-![Turb ONERA Cp A](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
-![Turb ONERA Cp B](../../Turbulent_ONERAM6/images/turb_onera_cp_b.png)
-![Turb ONERA Cp C](../../Turbulent_ONERAM6/images/turb_onera_cp_c.png)
-![Turb ONERA Cp D](../../Turbulent_ONERAM6/images/turb_onera_cp_d.png)
-
-Figure (3): Comparison of Cp profiles of the experimental results of Schmitt and Carpin (red squares) against SU2 computational results (blue line) at different sections along the span of the wing. (a) y/b = 0.2, (b) y/b = 0.65, (c) y/b = 0.8, (d) y/b = 0.95.
+Figure (4): Lift Curve of the NACA0012 with interval bounds predicted by the EQUiPS module. 
