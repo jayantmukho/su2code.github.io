@@ -31,7 +31,7 @@ This test case is for the NACA 0012 airfoil in viscous flow. This is a simple 2D
 
 The EQUiPS module uses the Eigenspace Perturbation methodology to estimate the uncertainties arising from RANS turbulence closures. This involves perturbing the eigenvalues and eigenvectors of the Reynolds stress tensor to explore the extremal states of componentality, and turbulence production of the flow. Utilizing 5 differently perturbed flow simulations, in addition to a baseline unperturbed flow simulation, the module provides interval estimates on the quantities of interest. Each perturbed simulation results in a different realization of the flow field, and by extension, a different realization of the QoIs. The interval bounds are formed by the maximum and minimum values the QoIs resulting from these 6 simulations.
 
-It is important to note here that these bounds are not informed by the use of any high fidelity data. These are purely range of possible values for the QOIs. They do not assume any probability distribution within them.
+It is important to note here that these bounds are not informed by the use of any high fidelity data. They represent the range of possible values for the QOIs. They do not assume any probability distribution within them.
 
 
 ### Problem Setup
@@ -39,8 +39,8 @@ It is important to note here that these bounds are not informed by the use of an
 This problem will solve the flow past the airfoil with these conditions:
 - Freestream Temperature = 300 K
 - Freestream Mach number = 0.15
-- Angle of attack (AOA) = 15deg 
-- Reynolds number = 6.02E6
+- Angle of attack (\alpha) = 15deg 
+- Reynolds number = 6.0E6
 - Reynolds length = 1.0 m
 
 Although this particular case simulates flow at 15deg, the same simulation can be run at varying angles of attack. The results section presents analyses from performing the simulations at a range of angles of attack which allows the exploration of the various flow regimes that occur. At low angles of attack, the flow stays attached and RANS simualtions are quite accurate in predicting the flow. At higher angles of attack, the onset of stall causes flow seperation which leads to inaccuracies in flow predictions.
@@ -86,7 +86,7 @@ BETA_DELTA= 1.0
 3. PERMUTE: Boolean that indicates whether eigenvector permutation needs to be performed
 4. URLX: Sets the under-relaxation factor used in performing perturbation. This option need not be changed unless the perturbation simulations are unstable. URXL can be in the range of [0; 1] and it's default value is 0:1. This should not be set to < 0:05 as the perturbations may not be completed
 by convergence.
-5. BETA_DELTA: Sets the magnitude of perturbation. This option should not be touched without having read the references on the Eigenspace Perturbation methodology [2, 1]. BETA_DELTA [0; 1] and it's default value is 1.0. The default value corresponds to a full perturbation and is required to correctly characterize the epistemic uncertainties
+5. BETA_DELTA: Sets the magnitude of perturbation. This option should not be touched without having read the references on the Eigenspace Perturbation methodology. BETA_DELTA [0; 1] and it's default value is 1.0. The default value corresponds to a full perturbation and is required to correctly characterize the epistemic uncertainties
 
 Specific combinations of COMPONENTALITY and PERMUTE are required to perform the 5 perturbed simulations needed to characterize the interval estimates on the QOIs. The combinations are highlighted in Table (1)
 
