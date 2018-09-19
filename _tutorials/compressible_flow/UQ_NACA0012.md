@@ -151,7 +151,7 @@ In order to obtain the interval bounds of a QOI, all 6 instantiations of the flo
 
 ![C_P Distribution_15_with_perturbations](../../UQ_NACA0012/images/aoa15_cp_upper_withPert.png)
 
-![C_P Distribution_15](../../UQ_NACA0012/images/aoa15_cp_upper2.png)
+![C_P Distribution_15](../../UQ_NACA0012/images/aoa15_cp_upper.png)
 
 The uncertainty bounds are formed by a union of all the states the QOI predicted by the module. 
 
