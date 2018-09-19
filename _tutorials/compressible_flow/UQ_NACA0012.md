@@ -39,7 +39,7 @@ It is important to note here that these bounds are not informed by the use of an
 This problem will solve the flow past the airfoil with these conditions:
 - Freestream Temperature = 300 K
 - Freestream Mach number = 0.15
-- Angle of attack (\alpha) = 15deg 
+- Angle of attack (AOA) = 15deg 
 - Reynolds number = 6.0E6
 - Reynolds length = 1.0 m
 
